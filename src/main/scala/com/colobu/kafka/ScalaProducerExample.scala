@@ -10,12 +10,24 @@ import kafka.producer.Producer
 import kafka.producer.KeyedMessage
 import java.util.Date
 
+/**
+  * 参考：https://github.com/bh-lushuai/kafka-example-in-scala
+  *
+  * bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 10 --topic scala_topic_test
+  */
 object ScalaProducerExample extends App {
-  val events = args(0).toInt
-  val topic = args(1)
-  val brokers = args(2)
+
+   /* val events = args(0).toInt
+    val topic = args(1)
+    val brokers = args(2)
+    val rnd = new Random()*/
+
+  val events = 100
+  val topic = "scala_topic_test"
+  val brokers = "localhost:9092"
   val rnd = new Random()
   val props = new Properties()
+
   props.put("metadata.broker.list", brokers)
   props.put("serializer.class", "kafka.serializer.StringEncoder")
   //props.put("partitioner.class", "com.colobu.kafka.SimplePartitioner")

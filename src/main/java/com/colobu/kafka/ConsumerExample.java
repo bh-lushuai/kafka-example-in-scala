@@ -73,7 +73,7 @@ public class ConsumerExample {
 	private static ConsumerConfig createConsumerConfig(String zookeeper, String groupId) {
 		Properties props = new Properties();
 		props.put("zookeeper.connect", zookeeper);
-		props.put("auto.offset.reset", "largest");
+		props.put("auto.offset.reset", "smallest");
 		props.put("group.id", groupId);
 		props.put("zookeeper.session.timeout.ms", "400");
 		props.put("zookeeper.sync.time.ms", "200");

@@ -29,7 +29,7 @@ class ScalaConsumerExample(val zookeeper: String,
     val props = new Properties()
     props.put("zookeeper.connect", zookeeper);
     props.put("group.id", groupId);
-    props.put("auto.offset.reset", "largest");
+    props.put("auto.offset.reset", "smallest");
     props.put("zookeeper.session.timeout.ms", "400");
     props.put("zookeeper.sync.time.ms", "200");
     props.put("auto.commit.interval.ms", "1000");
@@ -52,8 +52,13 @@ class ScalaConsumerExample(val zookeeper: String,
 }
 
 object ScalaConsumerExample extends App {
-  val example = new ScalaConsumerExample(args(0), args(1), args(2),args(4).toLong)
-  example.run(args(3).toInt)
+  val zookeeper="localhost:2181"
+  val groupId="ScalaConsumerExample-group-2"
+  val topic="scala_topic_test"
+  val delay=0l
+  val numThreads=3
+  val example = new ScalaConsumerExample(zookeeper, groupId, topic,delay)
+  example.run(numThreads)
 }
 
 class ScalaConsumerTest(val stream: KafkaStream[Array[Byte], Array[Byte]], val threadNumber: Int, val delay: Long) extends Logging with Runnable {
